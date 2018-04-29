@@ -39,13 +39,13 @@ function draw(){
   if(isMobile()){
     mobileQuads();
 
-    mainOsc.freq(rotationX/3+100);
-    bassOsc.freq(80+rotationY/8);
+    mainOsc.freq(rotationX*3+100);
+    bassOsc.freq(80+rotationY);
     trebleOsc.freq(440+sqrt(rotationX*rotationX+rotationY+rotationY));
 
     mainOsc.amp(0.5);
     bassOsc.amp(4);
-    trebleOsc.amp(sqrt(sqrt(sqrt((abs(rotationX-pRotationX)+abs(rotationY-pRotationY))/2))));
+    trebleOsc.amp(sqrt(sqrt(sqrt((abs(accelerationX-pAccelerationX)+abs(accelerationY-pAccelerationY))/2))));
   }
   else{
     quads();
