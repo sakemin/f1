@@ -41,11 +41,11 @@ function draw(){
 
     mainOsc.freq(abs(rotationX)*3+100);
     bassOsc.freq(80+abs(rotationY));
-    trebleOsc.freq(440+sqrt(abs(rotationX)*abs(rotationX)+abs(rotationY)+abs(rotationY)));
+    trebleOsc.freq(880+sqrt(abs(rotationX)*abs(rotationX)+abs(rotationY)+abs(rotationY)));
 
     mainOsc.amp(0.5);
     bassOsc.amp(4);
-    trebleOsc.amp(sqrt(sqrt(sqrt((abs(accelerationX)+abs(accelerationY))/2))));
+    trebleOsc.amp((sqrt((abs(accelerationX)+abs(accelerationY))/2));
   }
   else{
     quads();
