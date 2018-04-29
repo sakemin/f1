@@ -1,10 +1,35 @@
+var mainOsc;
+var bassOsc;
+var trebleOsc;
 
+var pMouseX = 0;
+var pMouseY = 0;
 
 function setup() {
   createCanvas(window.innerWidth,window.innerHeight,WEBGL);
   rectMode(CENTER);
   ortho(-width / 2, width / 2, height / 2, -height / 2, 0, 2000);
+
+  mainOsc = new p5.Oscillator();
+  mainOsc.setType('triangle');
+  mainOsc.freq(240);
+  mainOsc.amp(0);
+  mainOsc.start();
+
+  bassOsc = new p5.Oscillator();
+  bassOsc.setType('saw');
+  bassOsc.freq(240);
+  bassOsc.amp(0);
+  bassOsc.start();
+
+  trebleOsc = new p5.Oscillator();
+  trebleOsc.setType('square');
+  trebleOsc.freq(240);
+  trebleOsc.amp(0);
+  trebleOsc.start();
 }
+
+
 function draw(){
   background(0);
   stroke(255);
@@ -13,14 +38,33 @@ function draw(){
 
   if(isMobile()){
     mobileQuads();
+
+    mainOsc.freq(rotationX/3+100);
+    bassOsc.freq(80+rotationY/8);
+    trebleOsc.freq(440+sqrt(rotationX*rotationX+rotationY+rotationY));
+
+    mainOsc.amp(0.5);
+    bassOsc.amp(4);
+    trebleOsc.amp(sqrt(sqrt(sqrt((abs(rotationX-pRotationX)+abs(rotationY-pRotationY))/2))));
   }
   else{
     quads();
+    mainOsc.freq(mouseX/3+100);
+    bassOsc.freq(80+mouseY/8);
+    trebleOsc.freq(440+sqrt(mouseX*mouseX+mouseY+mouseY));
+
+      mainOsc.amp(0.5);
+      bassOsc.amp(4);
+      trebleOsc.amp(sqrt(sqrt(sqrt((abs(mouseX-pMouseX)+abs(mouseY-pMouseY))/2))));
+
   }
+
 
 
   drawOrbit();
 
+  pMouseX = mouseX;
+  pMouseY = mouseY;
 }
 
 function drawQuad(){
@@ -78,34 +122,34 @@ function quads(){
 
 function mobileQuads(){
   push();
-  rotateX(rotationX/10);
+  rotateX(rotationX/6);
     push();
-    rotateY(rotationY/10);
+    rotateY(rotationY/6);
     drawQuad();
     pop();
     push();
-    rotateY(-rotationY/10);
+    rotateY(-rotationY/6);
     drawQuad();
     pop();
     push();
-      rotateZ(rotationX/5);
+      rotateZ(rotationX/3);
       push();
-      rotateY(rotationY/10);
+      rotateY(rotationY/6);
       drawQuad();
       pop();
       push();
-      rotateY(-rotationY/10);
+      rotateY(-rotationY/6);
       drawQuad();
       pop();
     pop();
     push();
-        rotateZ(-rotationX/5);
+        rotateZ(-rotationX/3);
         push();
-        rotateY(rotationY/10);
+        rotateY(rotationY/6);
         drawQuad();
         pop();
         push();
-        rotateY(-rotationY/10);
+        rotateY(-rotationY/6);
         drawQuad();
         pop();
       pop();
