@@ -45,7 +45,7 @@ function draw(){
 
     mainOsc.amp(0.5);
     bassOsc.amp(4);
-    trebleOsc.amp((sqrt((abs(accelerationX)+abs(accelerationY))/2));
+    trebleOsc.amp(sqrt((abs(accelerationX)+abs(accelerationY))/2));
   }
   else{
     quads();
